@@ -1,0 +1,38 @@
+all:
+  datasize:
+# tiny size
+    tiny:
+      GenerateMember:
+        number: 1
+      GenerateCommunity:
+        number: 1
+      GenerateCommunityTopic:
+        number: 1
+      GenerateDiary:
+        number: 1
+      GenerateDiaryComment:
+        number: 1
+# small size
+    small:
+      GenerateMember:
+        number: 10
+      GenerateCommunity:
+        number: 10
+      GenerateCommunityTopic:
+        number: 10
+      GenerateCommunityTopicComment:
+        communitynumber: 3
+        topicnumber: 3
+        number: 3
+      GenerateCommunityEvent:
+        number: 10
+      GenerateCommunityEventComment:
+        communitynumber: 3
+        eventnumber: 3
+        number: 3
+        member: 3
+      GenerateDiary:
+        number: 10
+      GenerateDiaryComment:
+        number: 10
+

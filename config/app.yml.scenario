@@ -1,0 +1,42 @@
+all:
+  datatype:
+    sinario: "scenario"
+  datasize:
+    sinario:
+      a1:
+        GenerateMemberProfile:
+          profile: "1,2,3,4"
+          min: 1
+          max: 5000
+      a2:
+        GenerateMemberProfile:
+          profile: "1,2,3,4"
+          min: 5001
+          max: 10000
+      a3:
+        GenerateMemberProfile:
+          profile: "1,2,3,4"
+          min: 10001
+          min: 15000
+      m1:
+        SendMessage:
+          footprint: 10
+          dustrate: 10
+          number: 5
+          min: 1
+          min: 5000
+      m2:
+        SendMessage:
+          footprint: 10
+          dustrate: 10
+          number: 5
+          min: 5001
+          min: 10000
+      m3:
+        SendMessage:
+          footprint: 10
+          dustrate: 10
+          number: 5
+          min: 10001
+          min: 15000
+
