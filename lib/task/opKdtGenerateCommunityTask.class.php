@@ -49,6 +49,13 @@ class opKdtGenerateCommunityTask extends sfBaseTask
         array('description', $community->getName()),
       );
 
+      if (version_compare(OPENPNE_VERSION, '3.6.0-dev', '>='))
+      {
+        // new version
+        $configData[] = array('topic_authority', 'public');
+        $configData[] = array('public_flag', 'public');
+      }
+
       if (version_compare(OPENPNE_VERSION, '3.5.0-dev', '>='))
       {
         // new version
