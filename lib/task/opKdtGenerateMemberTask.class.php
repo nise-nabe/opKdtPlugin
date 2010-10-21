@@ -14,6 +14,7 @@ class opKdtGenerateMemberTask extends sfBaseTask
     $this->addOption('number', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of added members', 10);
     $this->addOption('mail-address-format', null, sfCommandOption::PARAMETER_REQUIRED, 'Mail-Address format', 'sns%d@example.com');
     $this->addOption('password-format', null, sfCommandOption::PARAMETER_REQUIRED, 'Password format', 'password');
+    $this->addOption('notactivemember-rate', null, sfCommandOption::PARAMETER_REQUIRED, 'Is active=0 member rate', 0);
   }
 
   protected function execute($arguments = array(), $options = array())
@@ -35,7 +36,7 @@ class opKdtGenerateMemberTask extends sfBaseTask
     {
       $member = new Member();
       $member->setName('dummy');
-      $member->setIsActive(true);
+      $member->setIsActive(self::fetchRandomNotActive($options['notactivemember-rate'], $n));
       $member->save();
 
       $member->setName(sprintf($options['name-format'], $member->getId()));
@@ -66,4 +67,18 @@ class opKdtGenerateMemberTask extends sfBaseTask
       }
     }
   }
+
+  protected static function fetchRandomNotActive($rate, $max)
+  {
+    if ($rate == 0) return true;
+    // 仮登録メンバーを一定割合で追加する
+    if ( rand(1,100) <= $rate)
+    {
+        return false;
+    } else {
+        return true;
+    }
+     
+  }
+
 }
