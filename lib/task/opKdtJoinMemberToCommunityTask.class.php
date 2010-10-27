@@ -11,8 +11,8 @@ class opKdtJoinMemberToCommunityTask extends sfBaseTask
 
     $this->addOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application', true);
     $this->addOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev');
-    $this->addOption('cmin', null, sfCommandOption::PARAMETER_REQUIRED, "Community Id min", 1);
-    $this->addOption('cmax', null, sfCommandOption::PARAMETER_REQUIRED, "Community Id max", 1);
+    $this->addOption('cmin', null, sfCommandOption::PARAMETER_REQUIRED, "Community Id min", null);
+    $this->addOption('cmax', null, sfCommandOption::PARAMETER_REQUIRED, "Community Id max", null);
     $this->addOption('number', null, sfCommandOption::PARAMETER_REQUIRED, "Community member number", 10);
   }
 

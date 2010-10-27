@@ -5,7 +5,7 @@ class opKdtGenerateMemberProfileTask extends sfBaseTask
   protected function configure()
   {
     $this->namespace = 'opKdt';
-    $this->name      = 'generate-member-profile';
+    $this->name      = 'generate-member-application';
 
     require sfConfig::get('sf_data_dir').'/version.php';
 
@@ -15,8 +15,7 @@ class opKdtGenerateMemberProfileTask extends sfBaseTask
         new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
         new sfCommandOption('min', null, sfCommandOption::PARAMETER_REQUIRED, 'Set Member Id Minimum', null),
         new sfCommandOption('max', null, sfCommandOption::PARAMETER_REQUIRED, 'Set Member Id Maximum', null),
-        new sfCommandOption('config', null, sfCommandOption::PARAMETER_REQUIRED, 'Set member config name(separated comma)', null),
-        new sfCommandOption('profile', null, sfCommandOption::PARAMETER_REQUIRED, 'Set member profile id(separated comma)', null),
+        new sfCommandOption('number', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of Application', null),
       )
     );
   }
@@ -35,22 +34,6 @@ class opKdtGenerateMemberProfileTask extends sfBaseTask
     }
     $memberIds = $this->conn->fetchColumn($sql, $where);
 
-    // configを増やす
-    if ($options['config'])
-    {
-      $configs = explode(',',$options['config']);
-      foreach ($memberIds as $memberid)
-      {
-        $member = Doctrine::getTable('Member')->find($memberid);
-        foreach ($configs as $config)
-        {
-          $member->setConfig($config, 'dummy');
-          $this->logSection('member_config', sprintf("%s - %s", $config, $memberid));
-        }
-        $member->free();
-      }
-    }
-
     // profileを増やす
     if ($options['profile'])
     {
@@ -63,15 +46,14 @@ class opKdtGenerateMemberProfileTask extends sfBaseTask
         $profileid = $value[0];
         if (in_array($profileid, $profiles))
         {
+//          opApplicationConfiguration::registerZend();
           foreach ($memberIds as $memberid)
           {
-            $sql = 'SELECT id FROM member_profile WHERE member_id = ? AND profile_id = ?';
+            $sql = 'SELECT id FROM member_profile WHERE member_id = ? AND application_id = ?';
             $where = array(intval($memberid), intval($profileid));
             $mp = $this->conn->fetchOne($sql, $where);
-print "$mp";
             if (!$mp)
             {
-              opApplicationConfiguration::registerZend();
               $memberProfile = new MemberProfile();
               $memberProfile->setMemberId($memberid);
               $memberProfile->setProfileId($profileid);

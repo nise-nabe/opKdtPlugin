@@ -1,13 +1,11 @@
 <?php
 
-class opKdtGenerateDiaryCommentTask extends sfBaseTask
+class opKdtGenerateAvtivityTask extends sfBaseTask
 {
-  protected $memberIds = array();
-
   protected function configure()
   {
     $this->namespace = 'opKdt';
-    $this->name      = 'generate-diary-comment';
+    $this->name      = 'generate-activity';
 
     require sfConfig::get('sf_data_dir').'/version.php';
 
@@ -15,7 +13,7 @@ class opKdtGenerateDiaryCommentTask extends sfBaseTask
       array(
         new sfCommandOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application', null),
         new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
-        new sfCommandOption('number', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of diary comments', 5),
+        new sfCommandOption('number', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of Activities', 5),
         new sfCommandOption('min', null, sfCommandOption::PARAMETER_REQUIRED, 'Sender Member Id Minimum', null),
         new sfCommandOption('max', null, sfCommandOption::PARAMETER_REQUIRED, 'Sender Member Id Maximum', null),
       )
@@ -36,21 +34,17 @@ class opKdtGenerateDiaryCommentTask extends sfBaseTask
     }
     $memberIds = $this->conn->fetchColumn($sql, $where);
 
-    $sql = 'SELECT max(id) FROM diary';
-    $maxdiaryId = $this->conn->fetchOne($sql);
-
-    foreach ($memberIds as $id)
+    foreach ($memberIds as $memberid)
     {
       for ($i=0; $i<$options['number']; ++$i)
       {
-        $diaryid = rand(1,$maxdiaryId);
-        $comment = new DiaryComment();
-        $comment->setDiaryId($diaryid);
-        $comment->setMemberId($id);
-        $comment->setBody('body');
-        $comment->save();
-        $comment->free();
-        $this->logSection('added a diary comment', sprintf('%s - %s', $diaryid, $id));
+        $ac = new ActivityData();
+        $ac->setMemberId($memberid);
+        $ac->setBody('body');
+        $ac->setPublicFlag(1);
+        $ac->save();
+        $ac->free();
+        $this->logSection('posted a activity', sprintf('%s', $memberid));
       }
     }
   }

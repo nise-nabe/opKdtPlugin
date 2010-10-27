@@ -14,6 +14,7 @@ class opKdtSendMessageTask extends sfBaseTask
         new sfCommandOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application', null),
         new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
         new sfCommandOption('number', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of send messages', 10),
+        new sfCommandOption('draftrate', null, sfCommandOption::PARAMETER_REQUIRED, 'Rate of draft messages', 5),
         new sfCommandOption('dustrate', null, sfCommandOption::PARAMETER_REQUIRED, 'Rate of dust messages', 10),
         new sfCommandOption('min', null, sfCommandOption::PARAMETER_REQUIRED, 'Sender Member Id Minimum', null),
         new sfCommandOption('max', null, sfCommandOption::PARAMETER_REQUIRED, 'Sender Member Id Maximum', null),
@@ -49,7 +50,15 @@ class opKdtSendMessageTask extends sfBaseTask
         $mes->setMemberId($id);
         $mes->setSubject('subject');
         $mes->setBody('body');
-        $mes->setIsSend(true);
+
+        // 一定割合で下書き
+        $rate = $options['draftrate'];
+        if ($rate != 0 && rand(1,100) <= $rate )
+        {
+          $mes->setIsSend(false);
+        } else {
+          $mes->setIsSend(true);
+        }
         $mes->setMessageTypeId(1);
         $mes->save();
 

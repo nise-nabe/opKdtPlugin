@@ -14,6 +14,8 @@ class opKdtGenerateCommunityEventTask extends sfBaseTask
         new sfCommandOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application', null),
         new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
         new sfCommandOption('number', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of community events', 10),
+        new sfCommandOption('cmin', null, sfCommandOption::PARAMETER_REQUIRED, 'Community Id min', null),
+        new sfCommandOption('cmax', null, sfCommandOption::PARAMETER_REQUIRED, 'Community Id max', null),
       )
     );
   }
@@ -21,20 +23,28 @@ class opKdtGenerateCommunityEventTask extends sfBaseTask
   protected function execute($arguments = array(), $options = array())
   {
     $databaseManager = new sfDatabaseManager($this->configuration);
+    $this->conn = $databaseManager->getDatabase('doctrine')->getDoctrineConnection();
 
-    $communities = Doctrine::getTable('Community')->findAll(Doctrine::HYDRATE_ARRAY);
-    foreach ($communities as $community)
+    $sql = 'SELECT id FROM community';
+    $where = array();
+    if ( $options['cmin'] && $options['cmax']  && $options['cmin'] <= $options['cmax'])
+    {
+        $sql .= ' WHERE id BETWEEN ? AND ?';
+        $where = array(intval($options['cmin']),intval($options['cmax']));
+    }
+    $commuIds = $this->conn->fetchColumn($sql, $where);
+    foreach ($commuIds as $cid)
     {
       for ($i=0; $i < $options['number']; ++$i)
       {
         $ct = new CommunityEvent();
-        $ct->setCommunityId($community['id']);
-        $ct->setMemberId(self::fetchRandomMemberId($community['id']));
+        $ct->setCommunityId($cid);
+        $ct->setMemberId(self::fetchRandomMemberId($cid));
         $ct->setName('name');
         $ct->setBody('body');
         $ct->save();
         $ct->free();
-        $this->logSection('created a community event', sprintf("%s", $community['id']));
+        $this->logSection('created a community event', sprintf("%s", $cid));
       }
     }
   }
