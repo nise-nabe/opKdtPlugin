@@ -1,6 +1,6 @@
 <?php
 
-class opKdtGenerateMemberProfileTask extends sfBaseTask
+class opKdtGenerateApplicationTask extends sfBaseTask
 {
   protected function configure()
   {

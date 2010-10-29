@@ -14,7 +14,7 @@ class opKdtGenerateDiaryTask extends sfBaseTask
         new sfCommandOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application', null),
         new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
         new sfCommandOption('number', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of diaries', 5),
-        new sfCommandOption('date', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of diary date', null),
+        new sfCommandOption('date', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of diary date', 0),
         new sfCommandOption('min', null, sfCommandOption::PARAMETER_REQUIRED, 'Member Id Minimum', null),
         new sfCommandOption('max', null, sfCommandOption::PARAMETER_REQUIRED, 'Member Id Maximum', null),
         new sfCommandOption('titlecount', null, sfCommandOption::PARAMETER_REQUIRED, 'count Title strings', 10),
