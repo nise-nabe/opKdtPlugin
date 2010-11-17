@@ -13,6 +13,8 @@ class opKdtJoinCommunityTask extends sfBaseTask
       array(
         new sfCommandOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application', null),
         new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
+        new sfCommandOption('min', null, sfCommandOption::PARAMETER_REQUIRED, 'MemberID min', null),
+        new sfCommandOption('max', null, sfCommandOption::PARAMETER_REQUIRED, 'MemberID max', null),
         new sfCommandOption('number', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of joined communities', 10),
       )
     );
@@ -21,8 +23,17 @@ class opKdtJoinCommunityTask extends sfBaseTask
   protected function execute($arguments = array(), $options = array())
   {
     $databaseManager = new sfDatabaseManager($this->configuration);
+    $this->conn = $databaseManager->getDatabase('doctrine')->getDoctrineConnection();
 
-    $members = Doctrine::getTable('Member')->findAll(Doctrine::HYDRATE_ARRAY);
+    $sql = 'SELECT id FROM member WHERE is_active != 0';
+    $where = array();
+    if ( $options['min'] && $options['max']  && $options['min'] <= $options['max'])
+    {
+        $sql .= ' AND id BETWEEN ? AND ?';
+        $where = array(intval($options['min']),intval($options['max']));
+    }
+    $memberIds = $this->conn->fetchColumn($sql, $where);
+
     $communities = Doctrine::getTable('Community')->findAll(Doctrine::HYDRATE_ARRAY);
     if (count($communities) < $options['number'])
     {
@@ -30,9 +41,9 @@ class opKdtJoinCommunityTask extends sfBaseTask
     }
     $communityIds = array_map(create_function('$c', 'return (int)$c[\'id\'];'), $communities);
 
-    foreach ($members as $member)
+    foreach ($memberIds as $memberid)
     {
-      $joinCommunities = Doctrine::getTable('Community')->retrievesByMemberId($member['id'], null);
+      $joinCommunities = Doctrine::getTable('Community')->retrievesByMemberId($memberid, null);
       $joinCommunityIds = array();
       if ($joinCommunities)
       {
@@ -50,10 +61,10 @@ class opKdtJoinCommunityTask extends sfBaseTask
       {
         $cm = new CommunityMember();
         $cm->setCommunityId($communityId);
-        $cm->setMemberId($member['id']);
+        $cm->setMemberId($memberid);
         $cm->save();
         $cm->free();
-        $this->logSection('added a community member', sprintf("%s - %s", $member['id'], $communityId));
+        $this->logSection('added a community member', sprintf("%s - %s", $memberid, $communityId));
       }
     }
   }

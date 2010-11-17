@@ -23,8 +23,6 @@ class opKdtJoinMemberToCommunityTask extends sfBaseTask
 
     $sql = 'SELECT id FROM member WHERE is_active != 0';
     $memberIds = $this->conn->fetchColumn($sql);
-    $sql = 'SELECT max(id) FROM member WHERE is_active != 0';
-    $maxmemberId = $this->conn->fetchOne($sql);
     $sql = 'SELECT id FROM community';
     $where = array();
     if ( $options['cmin'] && $options['cmax']  && $options['cmin'] <= $options['cmax'])
