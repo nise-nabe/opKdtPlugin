@@ -15,16 +15,15 @@ class opKdtGenerateMemberApplicationTask extends sfBaseTask
         new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
         new sfCommandOption('min', null, sfCommandOption::PARAMETER_REQUIRED, 'Set Member Id Minimum', null),
         new sfCommandOption('max', null, sfCommandOption::PARAMETER_REQUIRED, 'Set Member Id Maximum', null),
-        new sfCommandOption('nummin', null, sfCommandOption::PARAMETER_REQUIRED, 'Minimum number of Application', null),
-        new sfCommandOption('nummax', null, sfCommandOption::PARAMETER_REQUIRED, 'Maximum number of Application', null),
-        new sfCommandOption('number', null, sfCommandOption::PARAMETER_REQUIRED, 'Maximum Number of Application', null),
+        new sfCommandOption('appmin', null, sfCommandOption::PARAMETER_REQUIRED, 'Minimum limit application', null),
+        new sfCommandOption('appmax', null, sfCommandOption::PARAMETER_REQUIRED, 'Maximum limit application', null),
       )
     );
   }
 
   protected function execute($arguments = array(), $options = array())
   {
-    if ( !$options['nummin'] || !$options['nummax'] || ($options['nummin'] > $options['nummax']))
+    if ( !$options['appmin'] || !$options['appmax'] || ($options['appmin'] > $options['appmax']))
     {
       throw new Exception("invalid option: ");
     }
@@ -44,10 +43,9 @@ class opKdtGenerateMemberApplicationTask extends sfBaseTask
     }
     $memberIds = $this->conn->fetchColumn($sql, $where);
 
-//          opApplicationConfiguration::registerZend();
     foreach ($memberIds as $memberid)
     {
-      $appids = $this->setrandomappid($appIds, $options['nummin'], $options['nummax']);
+      $appids = $this->setrandomappid($appIds, $options['appmin'], $options['appmax']);
       foreach ($appids as $application_id)
       {
         $sql = 'SELECT id FROM member_application WHERE member_id = ? AND application_id = ?';
