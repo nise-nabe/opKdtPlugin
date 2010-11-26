@@ -5,7 +5,7 @@ class opKdtGenerateApplicationTask extends sfBaseTask
   protected function configure()
   {
     $this->namespace = 'opKdt';
-    $this->name      = 'generate-member-application';
+    $this->name      = 'generate-application';
 
     require sfConfig::get('sf_data_dir').'/version.php';
 
