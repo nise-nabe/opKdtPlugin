@@ -38,7 +38,7 @@ class opKdtGenerateCommunityTopicTask extends sfBaseTask
       for ($i=0; $i < $options['number']; ++$i)
       {
         $ct = new CommunityTopic();
-        $ct->setCommunityId($cid);
+        $ct->setCommunity(Doctrine::getTable('community')->find($cid));
         $ct->setMemberId(self::fetchRandomMemberId($cid));
         $ct->setName('name');
         $ct->setBody('body');
