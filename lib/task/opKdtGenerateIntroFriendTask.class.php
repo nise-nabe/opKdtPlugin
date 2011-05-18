@@ -11,6 +11,7 @@ class opKdtGenerateIntroFriendTask extends sfBaseTask
 
   }
 
+  // there is a bug that if you execute this method, the dumy members cannot quit.
   protected function execute($arguments = array(), $options = array())
   {
     $databaseManager = new sfDatabaseManager($this->configuration);
@@ -24,8 +25,8 @@ class opKdtGenerateIntroFriendTask extends sfBaseTask
       $max = mt_rand(1, count($memberIds));
       for($i = 0; $i < $max; ++$i)
       {
-        $from = mt_rand(1, count($memberIds));
-        if($from != $memberid)
+        $from = $memberIds[mt_rand(0, count($memberIds)-1)];
+        if(!Doctrine::getTable('IntroFriend')->getByFromAndTo($from, $memberid))
         {
           $in = new IntroFriend();
           $in->setMemberIdTo($memberid);
