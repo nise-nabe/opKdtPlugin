@@ -74,6 +74,7 @@ class opKdtGenerateCommunityTask extends sfBaseTask
         $communityConfig->setName($config[0]);
         $communityConfig->setValue($config[1]);
         $communityConfig->save();
+        $communityConfig->free();
       }
 
       $communityMember = new CommunityMember();
@@ -90,6 +91,7 @@ class opKdtGenerateCommunityTask extends sfBaseTask
       }
 
       $communityMember->save();
+      $communityMember->free();
       $this->logSection('community+', $community->getName());
     }
   }
