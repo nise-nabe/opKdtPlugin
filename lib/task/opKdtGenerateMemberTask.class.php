@@ -23,7 +23,7 @@ class opKdtGenerateMemberTask extends sfBaseTask
 
     $n = (int)$options['number'];
     $link = $options['link'];
-    if (null !== $link)
+    if (!is_null($link))
     {
       $linkMember = Doctrine::getTable('Member')->find($link);
       if (!$linkMember)
