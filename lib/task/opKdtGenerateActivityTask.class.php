@@ -40,7 +40,7 @@ class opKdtGenerateAvtivityTask extends sfBaseTask
       {
         $ac = new ActivityData();
         $ac->setMemberId($memberid);
-        $ac->setBody('body');
+        $ac->setBody(md5($i));
         $ac->setPublicFlag(1);
         $ac->save();
         $ac->free();
