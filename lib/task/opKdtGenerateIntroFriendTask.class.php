@@ -33,6 +33,7 @@ class opKdtGenerateIntroFriendTask extends sfBaseTask
           $in->setMemberIdFrom($from);
           $in->setContent('I introduced');
           $in->save();
+          $in->free();
           $this->logSection('write intro ', 'from ' . $from . ' to ' . $memberid);
         }
       }
