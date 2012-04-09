@@ -26,7 +26,7 @@ class opKdtGenerateCommunityClusterTask extends sfBaseTask
     }
     else
     {
-      if (Doctrine::getTable('Member')->count() < $options['cluster-number'] * $options['number'])
+      if (Doctrine::getTable('Member')->where('is_active != 0')->count() < $options['cluster-number'] * $options['number'])
       {
         echo 'there enough member'."\n";
         exit;
@@ -44,7 +44,7 @@ class opKdtGenerateCommunityClusterTask extends sfBaseTask
   private function createCluster($memberNum, $offset)
   {
     $memberIds = array();  
-    $members = Doctrine::getTable('Member')->createQuery()->select('id')->limit($memberNum)->offset($memberNum * $offset)->execute();
+    $members = Doctrine::getTable('Member')->createQuery()->select('id')->where('is_active != 0')->limit($memberNum)->offset($memberNum * $offset)->execute();
 
     for ($i = 0; $i < $memberNum; ++$i)
     {
