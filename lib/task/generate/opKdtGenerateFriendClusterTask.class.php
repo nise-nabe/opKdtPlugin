@@ -18,9 +18,9 @@ class opKdtGenerateFriendClusterTask extends sfBaseTask
 
   protected function execute($arguments = array(), $options = array())
   {
-    $databaseManager = new sfDatabaseManager($this->configuration);
     if ($options['forked'])
     {
+      $databaseManager = new sfDatabaseManager($this->configuration);
       $this->createCluster($options['number']);
     }
     else
