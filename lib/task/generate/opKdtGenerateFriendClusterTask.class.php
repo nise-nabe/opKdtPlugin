@@ -1,8 +1,8 @@
 <?php
 
 /**
- * number $B$N?t$N%U%l%s%I$r;}$D%a%s%P$NAH$r?7$7$/@8@.$9$k(B
- * $B$^$?!$(Bcluster-number $B$rM?$($k$H(B cluster-number $B$r@8@.$9$k!%(B
+ * number の数のフレンドを持つメンバの組を新しく生成する
+ * また，cluster-number を与えると cluster-number を生成する．
  */
 class opKdtGenerateFriendClusterTask extends sfBaseTask
 {
