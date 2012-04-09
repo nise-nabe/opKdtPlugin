@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * number の数のフレンドを持つメンバの組を新しく生成する
+ * また，cluster-number を与えると cluster-number を生成する．
+ */
 class opKdtGenerateFriendClusterTask extends sfBaseTask
 {
   protected function configure()
