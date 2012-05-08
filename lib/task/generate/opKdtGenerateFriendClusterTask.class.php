@@ -56,7 +56,7 @@ class opKdtGenerateFriendClusterTask extends sfBaseTask
       $this->setMemberConfig($member->getId(), 'mobile_address', $address);
 
       $password = 'password';
-      $this->setMemberConfig($member->getId(), 'password', $password);
+      $this->setMemberConfig($member->getId(), 'password', md5($password));
       $member->free(true);
     }
     for($i = 0; $i < $memberNum; ++$i)
