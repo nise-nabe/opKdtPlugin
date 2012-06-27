@@ -1,6 +1,6 @@
 <?php
 
-class opKdtBaseTask extends sfBaseTasko
+abstract class opKdtBaseTask extends sfBaseTask
 {
   protected function findPhpBinary()
   {
