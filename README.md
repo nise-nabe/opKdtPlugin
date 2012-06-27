@@ -1,4 +1,3 @@
-=================
 About opKdtPlugin
 =================
 
@@ -19,7 +18,7 @@ Kawahara用OpenPNE3開発支援ツール
 確実な再現性を求めたり一定の手順を求める場合にはあまり有効とはいえないでしょうが、
 「ちょっと」１００人ほどダミーデータがほしいなんていうときに便利かもしれません。
 
-OpenPNE3.2.x-3.5.x用です。
+OpenPNE3.2.x-3.6.x用です。
 
 テストデータ挿入用タスク
 ========================
@@ -38,25 +37,25 @@ OpenPNE3.2.x-3.5.x用です。
 
 ::
 
-  $ php symfony opKdt:generate-member
+    $ php symfony opKdt:generate-member
 
 ダミーメンバーを10作成する。
 
 ::
 
-  $ php symfony opKdt:generate-member --number=100
+    $ php symfony opKdt:generate-member --number=100
 
 ダミーメンバーを100作成する。
 
 ::
 
-  $ php symfony opKdt:generate-member --link=1
+    $ php symfony opKdt:generate-member --link=1
 
 メンバーIDが1のメンバーとフレンドリンクしたダミーメンバーを10作成する。
 
 ::
 
-  $ php symfony opKdt:generate-member --name-format="hoge%d"
+    $ php symfony opKdt:generate-member --name-format="hoge%d"
 
 メンバー名が hoge{id} のダミーメンバーを10作成する。
 
