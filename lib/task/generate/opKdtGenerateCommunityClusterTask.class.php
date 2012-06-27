@@ -77,7 +77,7 @@ class opKdtGenerateCommunityClusterTask extends opKdtBaseTask
         $communityMember = new CommunityMember();
         $communityMember->setCommunity($community);
         $communityMember->setMember($members[$j]);
-        if ($j === 0)
+        if (0 == $j)
         {
           $communityMember->addPosition('admin');
         }
