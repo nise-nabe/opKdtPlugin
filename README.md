@@ -23,7 +23,7 @@ OpenPNE3.2.x-3.6.x用です。
 テストデータ挿入用タスク
 ------------------------
 
-# メンバー
+## メンバー
 
 **opKdt:generate-member**
 
@@ -58,32 +58,32 @@ OpenPNE3.2.x-3.6.x用です。
 
 メンバー名が hoge{id} のダミーメンバーを10作成する。
 
-# コミュニティ
+## コミュニティ
 
     $ php symfony oopKdt:generate-community
     $ php symfony oopKdt:generate-community-topic
 
-# 日記
+## 日記
 
     $ php symfony oopKdt:generate-diary
     $ php symfony oopKdt:generate-diary-comment
 
-# メッセージ
+## メッセージ
 
     $ php symfony oopKdt:send-message
 
-# あしあと
+## あしあと
 
     $ php symfony oopKdt:put-footprint
 
-# フレンドにする
+## フレンドにする
 
     $ php symfony oopKdt:make-friend
 
-# コミュニティに参加する
+## コミュニティに参加する
 
     $ php symfony opopKdt:join-community
 
-# 上記すべてを実行
+## 上記すべてを実行
 
     $ php symfony oopKdt:generate-all
