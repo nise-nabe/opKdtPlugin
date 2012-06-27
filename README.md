@@ -2,7 +2,7 @@ About opKdtPlugin
 =================
 
 はじめに
-========
+--------
 
 これは
 Kawahara用OpenPNE3開発支援ツール
@@ -21,10 +21,9 @@ Kawahara用OpenPNE3開発支援ツール
 OpenPNE3.2.x-3.6.x用です。
 
 テストデータ挿入用タスク
-========================
+------------------------
 
-メンバー
---------
+# メンバー
 
 **opKdt:generate-member**
 
@@ -59,39 +58,32 @@ OpenPNE3.2.x-3.6.x用です。
 
 メンバー名が hoge{id} のダミーメンバーを10作成する。
 
-コミュニティ
-------------
+# コミュニティ
 
-opKdt:generate-community
-opKdt:generate-community-topic
+    $ php symfony oopKdt:generate-community
+    $ php symfony oopKdt:generate-community-topic
 
-日記
-----
+# 日記
 
-opKdt:generate-diary
-opKdt:generate-diary-comment
+    $ php symfony oopKdt:generate-diary
+    $ php symfony oopKdt:generate-diary-comment
 
-メッセージ
-------------
+# メッセージ
 
-opKdt:send-message
+    $ php symfony oopKdt:send-message
 
-あしあと
---------
+# あしあと
 
-opKdt:put-footprint
+    $ php symfony oopKdt:put-footprint
 
-フレンドにする
---------------
+# フレンドにする
 
-opKdt:make-friend
+    $ php symfony oopKdt:make-friend
 
-コミュニティに参加する
-----------------------
+# コミュニティに参加する
 
-opKdt:join-community
+    $ php symfony opopKdt:join-community
 
-上記すべてを実行
-----------------
+# 上記すべてを実行
 
-opKdt:generate-all
+    $ php symfony oopKdt:generate-all
