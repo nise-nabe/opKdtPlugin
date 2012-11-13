@@ -1,6 +1,6 @@
 <?php
 
-class opKdtGenerateAvtivityTask extends sfBaseTask
+class opKdtGenerateActivityTask extends sfBaseTask
 {
   protected function configure()
   {
