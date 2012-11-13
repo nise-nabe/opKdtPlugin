@@ -1,12 +1,10 @@
 <?php
 
-class opKdtPluginBackendCommunityForm extends BaseForm
+class opKdtPluginBackendForm extends BaseForm
 {
-  private $generateCommunity = 'GenerateCommunity';
-
   public function configure()
   {
-    $taskName = sprintf('opKdt%sTask', $this->generateCommunity);
+    $taskName = sprintf('opKdt%sTask', $this->getDefault('task'));
     $task = new $taskName(sfContext::getInstance()->getEventDispatcher(), new sfFormatter());
     $options = $task->getOptions();
 
@@ -18,14 +16,14 @@ class opKdtPluginBackendCommunityForm extends BaseForm
       $this->setDefault($optionName, $option->getDefault());
     }
 
-    $this->widgetSchema->setNameFormat('generate_community[%s]');
+    $this->widgetSchema->setNameFormat('generate_'.$this->taskName.'[%s]');
   }
 
   public function executeTask()
   {
     chdir(sfConfig::get('sf_root_dir'));
 
-    $taskName = sprintf('opKdt%sTask', $this->generateCommunity);
+    $taskName = sprintf('opKdt%sTask', $this->getDefault('task'));
     $task = new $taskName(sfContext::getInstance()->getEventDispatcher(), new sfFormatter());
 
     $options = array();

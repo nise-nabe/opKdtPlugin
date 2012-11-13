@@ -3,9 +3,9 @@
 <?php end_slot() ?>
 
 <?php slot('title', __('Kdt Plugin Configuration')) ?>
-<h3><?php echo __('Generate Community') ?></h3>
+<h3><?php echo __($task) ?></h3>
 
-<form action="<?php echo url_for('@kdt_generate_community') ?>" method="POST">
+<form action="<?php echo url_for('@kdt_task?task='.$task) ?>" method="POST">
 <table>
 <?php echo $form ?>
 <tr>

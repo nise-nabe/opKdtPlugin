@@ -4,5 +4,6 @@
 
 <?php slot('title', __('Kdt Plugin Configuration')) ?>
 
-<?php echo link_to(__('Generate Member'), '@kdt_generate_member') ?>
-<?php echo link_to(__('Generate %Community%'), '@kdt_generate_community') ?>
+<?php foreach ($tasks as $task): ?>
+<?php echo link_to(__($task), '@kdt_task?task='.$task) ?><br />
+<?php endforeach; ?>
