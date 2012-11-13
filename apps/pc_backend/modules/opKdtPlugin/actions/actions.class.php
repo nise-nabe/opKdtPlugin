@@ -5,7 +5,7 @@
  *
  * @package    OpenPNE
  * @subpackage opKdtPlugin
- * @author     Your name here
+ * @author     Yuya Watanabe <watanabe@openpne.jp>
  */
 class opKdtPluginActions extends sfActions
 {
