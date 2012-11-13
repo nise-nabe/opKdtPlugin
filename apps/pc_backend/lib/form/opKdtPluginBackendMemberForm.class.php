@@ -18,11 +18,11 @@ class opKdtPluginBackendMemberForm extends BaseForm
   {
     chdir(sfConfig::get('sf_root_dir'));
 
-    if (!is_null($this->getValue($this->generateMember)))
+    if (!is_null($this->getValue('number')))
     {
       $taskName = sprintf('opKdt%sTask', $this->generateMember);
       $task = new $taskName($dispatcher, new sfFormatter());
-      $task->run($arguments = array(), $options = array('number' => $this->getValue($this->generateMember)));
+      $task->run($arguments = array(), $options = array('number' => $this->getValue('number')));
     }
   }
 }
