@@ -29,30 +29,22 @@ OpenPNE3.2.x-3.6.x用です。
 
 ダミーメンバーを作成する。メールアドレスはPC/携帯ともに sns{id}@example.com がセットされ、パスワードは password がセットされる。
 
-また、デフォルトではメンバー名は「dymmy{id}」となる。
+また、デフォルトではメンバー名は「dummy{id}」となる。
 
 例
-~~
-
-::
+---
 
     $ php symfony opKdt:generate-member
 
 ダミーメンバーを10作成する。
 
-::
-
     $ php symfony opKdt:generate-member --number=100
 
 ダミーメンバーを100作成する。
 
-::
-
     $ php symfony opKdt:generate-member --link=1
 
 メンバーIDが1のメンバーとフレンドリンクしたダミーメンバーを10作成する。
-
-::
 
     $ php symfony opKdt:generate-member --name-format="hoge%d"
 
@@ -60,30 +52,30 @@ OpenPNE3.2.x-3.6.x用です。
 
 ## コミュニティ
 
-    $ php symfony oopKdt:generate-community
-    $ php symfony oopKdt:generate-community-topic
+    $ php symfony opKdt:generate-community
+    $ php symfony opKdt:generate-community-topic
 
 ## 日記
 
-    $ php symfony oopKdt:generate-diary
-    $ php symfony oopKdt:generate-diary-comment
+    $ php symfony opKdt:generate-diary
+    $ php symfony opKdt:generate-diary-comment
 
 ## メッセージ
 
-    $ php symfony oopKdt:send-message
+    $ php symfony opKdt:send-message
 
 ## あしあと
 
-    $ php symfony oopKdt:put-footprint
+    $ php symfony opKdt:put-footprint
 
 ## フレンドにする
 
-    $ php symfony oopKdt:make-friend
+    $ php symfony opKdt:make-friend
 
 ## コミュニティに参加する
 
-    $ php symfony opopKdt:join-community
+    $ php symfony opKdt:join-community
 
 ## 上記すべてを実行
 
-    $ php symfony oopKdt:generate-all
+    $ php symfony opKdt:generate-all
