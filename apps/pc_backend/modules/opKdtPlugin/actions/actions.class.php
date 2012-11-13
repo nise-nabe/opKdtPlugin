@@ -16,6 +16,10 @@ class opKdtPluginActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+  }
+
+  public function executeMember(sfWebRequest $request)
+  {
     $this->form = new opKdtPluginConfigurationForm();
 
     if ($request->isMethod(sfRequest::POST))
@@ -26,7 +30,7 @@ class opKdtPluginActions extends sfActions
         $this->form->executeTasks($this->dispatcher);
         $this->getUser()->setFlash('notice', 'Execute the tasks.');
 
-        $this->redirect('opKdtPlugin/index');
+        $this->redirect('opKdtPlugin/member');
       }
     }
   }

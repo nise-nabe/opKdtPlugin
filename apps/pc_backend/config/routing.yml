@@ -1,0 +1,3 @@
+kdt_generate_member:
+  url: /opKdtPlugin/member
+  param: { module: opKdtPlugin, action: member }
