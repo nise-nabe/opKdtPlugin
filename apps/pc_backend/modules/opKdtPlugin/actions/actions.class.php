@@ -25,14 +25,14 @@ class opKdtPluginActions extends sfActions
   */
   public function executeMember(sfWebRequest $request)
   {
-    $this->form = new opKdtPluginConfigurationForm();
+    $this->form = new opKdtPluginBackendMemberForm();
 
     if ($request->isMethod(sfRequest::POST))
     {
       $this->form->bind($request->getParameter($this->form->getName()));
       if ($this->form->isValid())
       {
-        $this->form->executeTasks($this->dispatcher);
+        $this->form->executeTask($this->dispatcher);
         $this->getUser()->setFlash('notice', 'Execute the tasks.');
 
         $this->redirect('opKdtPlugin/member');

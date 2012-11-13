@@ -1,0 +1,28 @@
+<?php
+
+class opKdtPluginBackendMemberForm extends BaseForm
+{
+  private $generateMember = 'GenerateMember';
+
+  public function configure()
+  {
+    $snsConfigTable = Doctrine::getTable('SnsConfig');
+
+    $this->setWidget($this->generateMember, new sfWidgetFormInput());
+    $this->setValidator($this->generateMember, new sfValidatorInteger(array('min' => 0), array('min' => 'Please input 0 or greater.')));
+
+    $this->widgetSchema->setNameFormat('op_kdt_plugin[%s]');
+  }
+
+  public function executeTask($dispatcher)
+  {
+    chdir(sfConfig::get('sf_root_dir'));
+
+    if (!is_null($this->getValue($this->generateMember)))
+    {
+      $taskName = sprintf('opKdt%sTask', $this->generateMember);
+      $task = new $taskName($dispatcher, new sfFormatter());
+      $task->run($arguments = array(),$options = array('number' => $this->getValue($this->generateMember)));
+    }
+  }
+}
