@@ -14,14 +14,14 @@ class opKdtPluginBackendCommunityForm extends BaseForm
     $this->widgetSchema->setNameFormat('generate_community[%s]');
   }
 
-  public function executeTask($dispatcher)
+  public function executeTask()
   {
     chdir(sfConfig::get('sf_root_dir'));
 
     if (!is_null($this->getValue('number')))
     {
       $taskName = sprintf('opKdt%sTask', $this->generateCommunity);
-      $task = new $taskName($dispatcher, new sfFormatter());
+      $task = new $taskName(sfContext::getInstance()->getEventDispatcher(), new sfFormatter());
       $task->run($arguments = array(), $options = array('number' => $this->getValue('number')));
     }
   }

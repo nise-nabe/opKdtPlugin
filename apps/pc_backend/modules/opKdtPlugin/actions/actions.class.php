@@ -32,7 +32,7 @@ class opKdtPluginActions extends sfActions
       $this->form->bind($request->getParameter($this->form->getName()));
       if ($this->form->isValid())
       {
-        $this->form->executeTask($this->dispatcher);
+        $this->form->executeTask();
         $this->getUser()->setFlash('notice', 'Execute the tasks.');
 
         $this->redirect('opKdtPlugin/member');
@@ -54,7 +54,7 @@ class opKdtPluginActions extends sfActions
       $this->form->bind($request->getParameter($this->form->getName()));
       if ($this->form->isValid())
       {
-        $this->form->executeTask($this->dispatcher);
+        $this->form->executeTask();
         $this->getUser()->setFlash('notice', 'Execute the tasks.');
 
         $this->redirect('opKdtPlugin/community');
