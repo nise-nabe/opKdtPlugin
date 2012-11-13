@@ -18,6 +18,11 @@ class opKdtPluginActions extends sfActions
   {
   }
 
+ /**
+  * Executes member generate action
+  *
+  * @param sfWebRequest $request A request object
+  */
   public function executeMember(sfWebRequest $request)
   {
     $this->form = new opKdtPluginConfigurationForm();
