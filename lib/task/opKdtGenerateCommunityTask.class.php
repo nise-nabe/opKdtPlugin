@@ -9,7 +9,7 @@ class opKdtGenerateCommunityTask extends sfBaseTask
 
     require sfConfig::get('sf_data_dir').'/version.php';
 
-    $this->addOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application', true);
+    $this->addOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application', 'pc_frontend');
     $this->addOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev');
     $this->addOption('name-format', null, sfCommandOption::PARAMETER_REQUIRED, "Member's Name format", 'dummy%d');
     $this->addOption('admin-member', 'a', sfCommandOption::PARAMETER_REQUIRED, "Admin member Id", 1);

@@ -6,10 +6,17 @@ class opKdtPluginBackendCommunityForm extends BaseForm
 
   public function configure()
   {
-    $snsConfigTable = Doctrine::getTable('SnsConfig');
+    $taskName = sprintf('opKdt%sTask', $this->generateCommunity);
+    $task = new $taskName(sfContext::getInstance()->getEventDispatcher(), new sfFormatter());
+    $options = $task->getOptions();
 
-    $this->setWidget('number', new sfWidgetFormInput());
-    $this->setValidator('number',  new sfValidatorInteger(array('min' => 0), array('min' => 'Please input 0 or greater.')));
+    foreach ($task->getOptions() as $option)
+    {
+      $optionName = $option->getName();
+      $this->setWidget($optionName, new sfWidgetFormInput());
+      $this->setValidator($optionName,  new sfValidatorString());
+      $this->setDefault($optionName, $option->getDefault());
+    }
 
     $this->widgetSchema->setNameFormat('generate_community[%s]');
   }
@@ -18,11 +25,16 @@ class opKdtPluginBackendCommunityForm extends BaseForm
   {
     chdir(sfConfig::get('sf_root_dir'));
 
-    if (!is_null($this->getValue('number')))
+    $taskName = sprintf('opKdt%sTask', $this->generateCommunity);
+    $task = new $taskName(sfContext::getInstance()->getEventDispatcher(), new sfFormatter());
+
+    $options = array();
+    foreach ($task->getOptions() as $option)
     {
-      $taskName = sprintf('opKdt%sTask', $this->generateCommunity);
-      $task = new $taskName(sfContext::getInstance()->getEventDispatcher(), new sfFormatter());
-      $task->run($arguments = array(), $options = array('number' => $this->getValue('number')));
+      $optionName =  $option->getName();
+      $options[$optionName] = $this->getValue($optionName);
     }
+
+    $task->run(array(), $options);
   }
 }
