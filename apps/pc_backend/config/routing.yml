@@ -1,3 +1,7 @@
 kdt_generate_member:
   url: /opKdtPlugin/member
   param: { module: opKdtPlugin, action: member }
+
+kdt_generate_community:
+  url: /opKdtPlugin/community
+  param: { module: opKdtPlugin, action: community }

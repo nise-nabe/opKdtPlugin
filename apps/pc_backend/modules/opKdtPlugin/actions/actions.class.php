@@ -39,4 +39,26 @@ class opKdtPluginActions extends sfActions
       }
     }
   }
+
+ /**
+  * Executes member generate action
+  *
+  * @param sfWebRequest $request A request object
+  */
+  public function executeCommunity(sfWebRequest $request)
+  {
+    $this->form = new opKdtPluginBackendCommunityForm();
+
+    if ($request->isMethod(sfRequest::POST))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()));
+      if ($this->form->isValid())
+      {
+        $this->form->executeTask($this->dispatcher);
+        $this->getUser()->setFlash('notice', 'Execute the tasks.');
+
+        $this->redirect('opKdtPlugin/community');
+      }
+    }
+  }
 }
